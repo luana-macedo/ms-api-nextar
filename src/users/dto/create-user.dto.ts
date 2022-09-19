@@ -1,30 +1,18 @@
 import { User } from '../entities/user.entity';
-import {
-    IsEmail,
-    IsString,
-    Matches,
-    MaxLength,
-    MinLength,
-    IsBoolean
-  } from 'class-validator';
+import { Permission } from '../entities/enums/permission.enum';
 export class CreateUserDto {
 
-    @IsString()
     name: string;
 
-    @IsString()
-    @MinLength(4)
-    @MaxLength(20)
-    @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {
-      message: 'password too weak',
-    })
+
     password: string;
 
-    @IsEmail()
+
     email: string;
-    @IsBoolean()
-    permission: boolean;
-    @IsString()
+
+
+    permission: Permission[];
+
     phone: string;
 }
 function Column(arg0: { select: boolean; }) {

@@ -1,5 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
+import { type } from 'os';
+import { Permission } from './enums/permission.enum';
 
 export type UserDocument = User & Document;
 
@@ -15,7 +17,7 @@ export class User {
     email: string;
 
     @Prop()
-    permission: boolean;
+    permissions: Permission[];
 
     @Prop()
     phone: string;
