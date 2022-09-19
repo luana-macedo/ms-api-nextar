@@ -13,6 +13,11 @@ export class UsersController {
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
   }
+  @Get('email')
+  email() {
+    return this.usersService.findEmail('luana.sobrenome@email.com')
+    // return this.usersService.create(createUserDto);
+  }
 
   @Get()
   findAll() {   
@@ -22,6 +27,11 @@ export class UsersController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.usersService.findOne(id);
+  }
+
+  @Get('email/:email')
+  findByEmail(@Param('email') email: string) {
+    return this.usersService.findOne(email);
   }
 
   @Patch(':id')
