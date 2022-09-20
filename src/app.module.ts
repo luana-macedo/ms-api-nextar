@@ -7,7 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { AppController } from './app.controller';
 import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core';
-import RoleGuard from './auth/roles/roles.guard';
+import { ProfileController } from './users/profile/profile.controller';
 
 
 @Module({
@@ -16,7 +16,7 @@ import RoleGuard from './auth/roles/roles.guard';
   MongooseModule.forRoot(process.env.MONGODB),
   MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
   AuthModule],
-  controllers: [UsersController, AppController],
+  controllers: [UsersController, AppController, ProfileController],
   providers: [UsersService]
 })
 export class AppModule {}

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { ExecutionContext, Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectModel } from '@nestjs/mongoose';
@@ -6,6 +6,7 @@ import { User, UserDocument } from './entities/user.entity';
 import { Model } from 'mongoose';
 import * as bcrypt from 'bcrypt';
 import { use } from 'passport';
+import { RequestWithUser } from 'src/auth/requestWithUser';
 
 @Injectable()
 export class UsersService {
@@ -33,7 +34,7 @@ export class UsersService {
     return this.userModel.findOne({email});
   }
 
-  update(id: string, updateUserDto: UpdateUserDto) {
+  async update(id: string, updateUserDto: UpdateUserDto) {
     return this.userModel
       .findByIdAndUpdate(
         {
@@ -41,6 +42,7 @@ export class UsersService {
         },
         {
           $set: updateUserDto,
+          password: await bcrypt.hash(updateUserDto.password, 10),
         },
         {
           new: true,
@@ -52,4 +54,6 @@ export class UsersService {
   remove(id: string) {
     return this.userModel.deleteOne({ _id: id }).exec();
   }
+
+
 }
