@@ -28,6 +28,7 @@ export class AuthService {
     const param = user._doc
     const payload = { id: param._id, email: param.email, permissions: param.permissions[0] };
     return {
+      permissions: payload.permissions,
       access_token: this.jwtService.sign(payload),
     };
   }

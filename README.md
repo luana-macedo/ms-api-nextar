@@ -1,73 +1,50 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
-
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+##Nextar user api
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Esta aplicação é um uma Api de gerenciamento de Usuários com acesso restrito mediante autenticação. Temos dois níveis de acesso de usuário: user e admin
+O usuário ‘“user” poderá apenas consultar informações e editar seu próprio perfil
+O usuário admin poderá consultar informações e cadastrar/editar todos usuários
+Etapas para rodar localmente você precisará de: 
+Nodejs instalado,
+repositório ms-nextar-api clonado 
+prompt de comando 
 
-## Installation
+Siga os comando abaixo para rodar o projeto localmente:
+Primeiro crie um arquivo .env e adicione a seguinte variável de ambiente:
+MONGODB='mongodb+srv://luana:7wLrpsfTYb2pWBvG@cluster0.mtjrqdm.mongodb.net/?retryWrites=true&w=majority'
 
-```bash
-$ npm install
-```
+no prompt de comando:
+npm install
+npm start:dev
+Para testar as requisições no postman, siga os passos: 
 
-## Running the app
+Fazer login:
+Post: http://localhost:8082/auth/login
 
-```bash
-# development
-$ npm run start
+Para logar como admin:
+email: admin@email.com
+senha: Lu159753
 
-# watch mode
-$ npm run start:dev
+para logar como usuário:
+    "password": "Us159753",
+    "email": "user@email.com"
 
-# production mode
-$ npm run start:prod
-```
+Copie o token retornado e cole em authorization no header para acessar outras requisições.
 
-## Test
+Lista de requisições:
 
-```bash
-# unit tests
-$ npm run test
+Post: http://localhost:8082/auth/login
+Get, Post, patch e delete http://localhost:8082/users
+Get: http://localhost:8082/profile
+Patch: http://localhost:8082/profile/edit
 
-# e2e tests
-$ npm run test:e2e
+Json exemplo:
+{
+    "password": "Us159753",
+    "email": "user@email.com",
+    "permissions": "user",
+    "phone": "011955551234",
+    "name": "user"
+ }
 
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
