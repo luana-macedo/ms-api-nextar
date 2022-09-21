@@ -1,4 +1,3 @@
-import { User } from '../entities/user.entity';
 import {
     IsEmail,
     IsString,
@@ -7,7 +6,7 @@ import {
     MinLength,
     IsEnum
   } from 'class-validator';
-import { Permission } from '../entities/enums/permission.enum';
+import { Permission } from '../../../domain/entity/users/enums/permission.enum';
 export class CreateUserDto {
 
     @IsString()

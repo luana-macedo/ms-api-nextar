@@ -1,8 +1,8 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { UsersService } from '../users/users.service';
+import { UsersService } from './users.service';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
-import { Permission } from 'src/users/entities/enums/permission.enum';
+import { Permission } from 'src/domain/entity/users/enums/permission.enum';
 
 @Injectable()
 export class AuthService {

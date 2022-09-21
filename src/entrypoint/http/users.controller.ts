@@ -1,10 +1,10 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Request } from '@nestjs/common';
-import { UsersService } from './users.service';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
-import { Permission } from './entities/enums/permission.enum';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import RoleGuard from 'src/auth/roles/roles.guard';
+import { UsersService } from '../../domain/usecase/users.service';
+import { CreateUserDto } from '../../dataprovider/database/users/create-user.dto';
+import { UpdateUserDto } from  '../../dataprovider/database/users/update-user.dto';
+import { Permission } from '../../domain/entity/users/enums/permission.enum';
+import { JwtAuthGuard } from 'src/domain/usecase/jwt-auth.guard';
+import RoleGuard from 'src/domain/usecase/roles/roles.guard';
 
 @UseGuards(JwtAuthGuard)
 
@@ -20,13 +20,6 @@ export class UsersController {
   @UseGuards(JwtAuthGuard)
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
-  }
-  @Get('email')
-  @UseGuards(RoleGuard(Permission.Admin))
-  @UseGuards(JwtAuthGuard)
-  email() {
-    return this.usersService.findEmail('luana.sobrenome@email.com')
-    // return this.usersService.create(createUserDto);
   }
 
   @Get()
@@ -47,7 +40,14 @@ export class UsersController {
   @UseGuards(RoleGuard(Permission.Admin))
   @UseGuards(JwtAuthGuard)
   findByEmail(@Param('email') email: string) {
-    return this.usersService.findOne(email);
+    return this.usersService.findEmail(email);
+  }
+
+  @Get('name/:name')
+  @UseGuards(RoleGuard(Permission.Admin))
+  @UseGuards(JwtAuthGuard)
+  findByByName(@Param('name') name: string) {
+    return this.usersService.findName(name);
   }
 
   @Patch(':id')

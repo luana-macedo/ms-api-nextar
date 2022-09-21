@@ -1,12 +1,10 @@
-import { ExecutionContext, Injectable } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { Injectable } from '@nestjs/common';
+import { CreateUserDto } from  '../../dataprovider/database/users/create-user.dto';
+import { UpdateUserDto } from  '../../dataprovider/database/users/update-user.dto';
 import { InjectModel } from '@nestjs/mongoose';
-import { User, UserDocument } from './entities/user.entity';
+import { User, UserDocument } from '../entity/users/user.entity';
 import { Model } from 'mongoose';
 import * as bcrypt from 'bcrypt';
-import { use } from 'passport';
-import { RequestWithUser } from 'src/auth/requestWithUser';
 
 @Injectable()
 export class UsersService {
@@ -32,6 +30,10 @@ export class UsersService {
 
   findEmail(email: string) {
     return this.userModel.findOne({email});
+  }
+
+  findName(name: string) {
+    return this.userModel.findOne({name});
   }
 
   async update(id: string, updateUserDto: UpdateUserDto) {
